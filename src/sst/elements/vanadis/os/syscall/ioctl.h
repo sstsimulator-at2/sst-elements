@@ -1,8 +1,8 @@
-// Copyright 2009-2025 NTESS. Under the terms
+// Copyright 2009-2026 NTESS. Under the terms
 // of Contract DE-NA0003525 with NTESS, the U.S.
 // Government retains certain rights in this software.
 //
-// Copyright (c) 2009-2025, NTESS
+// Copyright (c) 2009-2026, NTESS
 // All rights reserved.
 //
 // Portions are copyright of other developers:
@@ -27,13 +27,14 @@ public:
     VanadisIoctlSyscall( VanadisNodeOSComponent* os, SST::Link* coreLink, OS::ProcessInfo* process, VanadisSyscallIoctlEvent* event )
         : VanadisSyscall( os, coreLink, process, event, "ioctl" )
     {
+        #ifdef VANADIS_BUILD_DEBUG
         m_output->verbose(CALL_INFO, 2, VANADIS_OS_DBG_SYSCALL,
                             "[syscall-ioctl] ioctl( %" PRId64 ", r: %c / w: %c / ptr: 0x%" PRI_ADDR " / size: %" PRIu64
                             " / op: %" PRIu64 " / drv: %" PRIu64 " )\n",
                             event->getFileDescriptor(), event->isRead() ? 'y' : 'n',
                             event->isWrite() ? 'y' : 'n', event->getDataPointer(), event->getDataLength(),
                             event->getIOOperation(), event->getIODriver());
-
+        #endif
         setReturnFail(-LINUX_ENOTTY );
     }
 };

@@ -1,8 +1,8 @@
-// Copyright 2009-2025 NTESS. Under the terms
+// Copyright 2009-2026 NTESS. Under the terms
 // of Contract DE-NA0003525 with NTESS, the U.S.
 // Government retains certain rights in this software.
 //
-// Copyright (c) 2009-2025, NTESS
+// Copyright (c) 2009-2026, NTESS
 // All rights reserved.
 //
 // Portions are copyright of other developers:
@@ -15,26 +15,26 @@
 
 #pragma once
 
-#include <mercury/components/operating_system_fwd.h>
-#include <mercury/operating_system/libraries/event_library.h>
+#include <mercury/components/operating_system_api.h>
+#include <mercury/operating_system/libraries/library.h>
 
 namespace SST {
 namespace Hg {
 
 class Service :
-  public EventLibrary
+  public Library
 {
 
  public:
   virtual void start() {}
 
  protected:
-  Service(const std::string& libname, SoftwareId sid, OperatingSystem* os) :
-    EventLibrary(libname, sid, os)
+  Service(const std::string& libname, SoftwareId sid, OperatingSystemAPI* os) :
+    Library(libname, sid, os)
   {}
 
-  Service(const char* prefix, SoftwareId sid, OperatingSystem* os) :
-    EventLibrary(prefix, sid, os)
+  Service(const char* prefix, SoftwareId sid, OperatingSystemAPI* os) :
+    Library(prefix, sid, os)
   {}
 
   ~Service() override{}

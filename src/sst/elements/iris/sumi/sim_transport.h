@@ -1,5 +1,5 @@
 /**
-Copyright 2009-2025 National Technology and Engineering Solutions of Sandia,
+Copyright 2009-2026 National Technology and Engineering Solutions of Sandia,
 LLC (NTESS).  Under the terms of Contract DE-NA-0003525, the U.S. Government
 retains certain rights in this software.
 
@@ -8,7 +8,7 @@ by National Technology and Engineering Solutions of Sandia, LLC., a wholly
 owned subsidiary of Honeywell International, Inc., for the U.S. Department of
 Energy's National Nuclear Security Administration under contract DE-NA0003525.
 
-Copyright (c) 2009-2025, NTESS
+Copyright (c) 2009-2026, NTESS
 
 All rights reserved.
 
@@ -187,7 +187,7 @@ class SimTransport : public Transport, public SST::Hg::Library {
 
   int* nidlist() const override;
 
-  void incomingEvent(SST::Event *ev);
+  void incomingEvent(SST::Event *ev) override;
 
   void compute(SST::Hg::TimeDelta t);
 
@@ -322,7 +322,7 @@ class SimTransport : public Transport, public SST::Hg::Library {
 
   double pragma_timeout_;
 
-  SST::Hg::OperatingSystem* os_;
+  SST::Hg::OperatingSystemAPI* os_;
 
   void drop(Message*){}
 

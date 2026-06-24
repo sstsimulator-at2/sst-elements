@@ -1,8 +1,8 @@
-// Copyright 2013-2025 NTESS. Under the terms
+// Copyright 2013-2026 NTESS. Under the terms
 // of Contract DE-NA0003525 with NTESS, the U.S.
 // Government retains certain rights in this software.
 //
-// Copyright (c) 2013-2025, NTESS
+// Copyright (c) 2013-2026, NTESS
 // All rights reserved.
 //
 // Portions are copyright of other developers:
@@ -148,7 +148,7 @@ private:
     /* Turn clocks off when idle */
     bool        clockOn;
     Clock::Handler<DirectoryController>*  clockHandler;
-    TimeConverter* defaultTimeBase;
+    TimeConverter defaultTimeBase;
     SimTime_t   lastActiveClockCycle;
 
     /* Statistics counters for profiling DC */

@@ -1,8 +1,8 @@
-// Copyright 2009-2025 NTESS. Under the terms
+// Copyright 2009-2026 NTESS. Under the terms
 // of Contract DE-NA0003525 with NTESS, the U.S.
 // Government retains certain rights in this software.
 //
-// Copyright (c) 2009-2025, NTESS
+// Copyright (c) 2009-2026, NTESS
 // All rights reserved.
 //
 // Portions are copyright of other developers:
@@ -115,7 +115,9 @@ public:
             phys_fp_regs_in_1 = getPhysFPRegIn(1);
         }
         instOp(regFile,phys_fp_regs_in_0,phys_fp_regs_in_1,phys_int_regs_out_0 );
+        #ifdef VANADIS_BUILD_DEBUG
         log(output, 16, 65535,phys_int_regs_out_0,phys_fp_regs_in_0);
+        #endif
 
         markExecuted();
     }

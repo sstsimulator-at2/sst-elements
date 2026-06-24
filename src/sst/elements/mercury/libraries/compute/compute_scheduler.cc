@@ -1,8 +1,8 @@
-// Copyright 2009-2025 NTESS. Under the terms
+// Copyright 2009-2026 NTESS. Under the terms
 // of Contract DE-NA0003525 with NTESS, the U.S.
 // Government retains certain rights in this software.
 //
-// Copyright (c) 2009-2025, NTESS
+// Copyright (c) 2009-2026, NTESS
 // All rights reserved.
 //
 // Portions are copyright of other developers:
@@ -14,13 +14,12 @@
 // distribution.
 
 #include <mercury/libraries/compute/compute_scheduler.h>
-#include <mercury/components/operating_system_CL.h>
 #include <mercury/operating_system/process/app.h>
 
 namespace SST {
 namespace Hg {
 
-ComputeScheduler::ComputeScheduler(SST::Params &params, OperatingSystemCL* os)
+ComputeScheduler::ComputeScheduler(SST::Params &params, OperatingSystemCLAPI* os)
     : os_(os), ncore_active_(0)
 {
   ncores_ = params.find<int>("ncores", 24);

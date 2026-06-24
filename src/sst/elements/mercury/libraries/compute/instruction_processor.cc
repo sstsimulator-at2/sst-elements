@@ -1,8 +1,8 @@
-// Copyright 2009-2025 NTESS. Under the terms
+// Copyright 2009-2026 NTESS. Under the terms
 // of Contract DE-NA0003525 with NTESS, the U.S.
 // Government retains certain rights in this software.
 //
-// Copyright (c) 2009-2025, NTESS
+// Copyright (c) 2009-2026, NTESS
 // All rights reserved.
 //
 // Portions are copyright of other developers:
@@ -14,7 +14,7 @@
 // distribution.
 
 #include <mercury/libraries/compute/instruction_processor.h>
-#include <mercury/components/node_CL.h>
+#include <mercury/components/compute_library/node_cl.h>
 #include <mercury/common/util.h>
 #include <sst/core/unitAlgebra.h>
 

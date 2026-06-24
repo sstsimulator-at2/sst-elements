@@ -1,8 +1,8 @@
-// Copyright 2009-2025 NTESS. Under the terms
+// Copyright 2009-2026 NTESS. Under the terms
 // of Contract DE-NA0003525 with NTESS, the U.S.
 // Government retains certain rights in this software.
 //
-// Copyright (c) 2009-2025, NTESS
+// Copyright (c) 2009-2026, NTESS
 // All rights reserved.
 //
 // Portions are copyright of other developers:
@@ -25,9 +25,10 @@ using namespace SST::Vanadis;
 VanadisExitGroupSyscall::VanadisExitGroupSyscall( VanadisNodeOSComponent* os, SST::Link* coreLink, OS::ProcessInfo* process, VanadisSyscallExitGroupEvent* event )
     : VanadisSyscall( os, coreLink, process, event, "exitgroup" )
 {
+    #ifdef VANADIS_BUILD_DEBUG
     m_output->verbose(CALL_INFO, 16, 0, "[syscall-exitgroup] core=%d thread=%d tid=%d pid=%d exit_code=%" PRIu64 "\n",
             event->getCoreID(), event->getThreadID(), process->gettid(), process->getpid(), event->getExitCode() );
-
+    #endif
     // given we are terminating all threads in the group, I'm assuming we don't have to write 0 to the tidAddress
 
     auto threads = process->getThreadList();

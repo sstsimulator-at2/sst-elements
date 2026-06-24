@@ -1,8 +1,8 @@
-// Copyright 2009-2025 NTESS. Under the terms
+// Copyright 2009-2026 NTESS. Under the terms
 // of Contract DE-NA0003525 with NTESS, the U.S.
 // Government retains certain rights in this software.
 //
-// Copyright (c) 2009-2025, NTESS
+// Copyright (c) 2009-2026, NTESS
 // All rights reserved.
 //
 // Portions are copyright of other developers:
@@ -59,42 +59,56 @@ bool
 registerCompareValues(VanadisRegisterCompareType compareType, VanadisRegisterFile* regFile, VanadisInstruction* ins,
                       SST::Output* output, T left_value, T right_value) {
 
+    #ifdef VANADIS_BUILD_DEBUG
     register_compare_values_print_msg(CALL_INFO, output, left_value, right_value);
-
+    #endif
     bool compare_result = false;
 
     switch (compareType) {
     case REG_COMPARE_EQ: {
         compare_result = (left_value) == (right_value);
+        #ifdef VANADIS_BUILD_DEBUG
         output->verbose(CALL_INFO, 16, 0, "-----> compare: equal     / result: %s\n",
                         (compare_result ? "true" : "false"));
+        #endif
     } break;
     case REG_COMPARE_NEQ: {
         compare_result = (left_value) != (right_value);
+        #ifdef VANADIS_BUILD_DEBUG
         output->verbose(CALL_INFO, 16, 0, "-----> compare: not-equal / result: %s\n",
                         (compare_result ? "true" : "false"));
+        #endif
     } break;
     case REG_COMPARE_LT: {
         compare_result = (left_value) < (right_value);
+        #ifdef VANADIS_BUILD_DEBUG
         output->verbose(CALL_INFO, 16, 0, "-----> compare: less-than / result: %s\n",
                         (compare_result ? "true" : "false"));
+        #endif
     } break;
     case REG_COMPARE_LTE: {
         compare_result = (left_value) <= (right_value);
+        #ifdef VANADIS_BUILD_DEBUG
         output->verbose(CALL_INFO, 16, 0, "-----> compare: less-than-eq / result: %s\n",
                         (compare_result ? "true" : "false"));
+        #endif
     } break;
     case REG_COMPARE_GT: {
         compare_result = (left_value) > (right_value);
+        #ifdef VANADIS_BUILD_DEBUG
         output->verbose(CALL_INFO, 16, 0, "-----> compare: greater-than / result: %s\n",
                         (compare_result ? "true" : "false"));
+        #endif
     } break;
     case REG_COMPARE_GTE: {
         compare_result = (left_value) >= (right_value);
+        #ifdef VANADIS_BUILD_DEBUG
         output->verbose(CALL_INFO, 16, 0, "-----> compare: greater-than-eq / result: %s\n",
                         (compare_result ? "true" : "false"));
+        #endif
     } break;
     default: {
+        // Do not ifdef output, (rare) error condition
         output->verbose(CALL_INFO, 16, 0, "-----> Unknown comparison operation at instruction: 0x%" PRI_ADDR "\n",
                         ins->getInstructionAddress());
         ins->flagError();

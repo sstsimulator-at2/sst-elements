@@ -1,8 +1,8 @@
-// Copyright 2009-2025 NTESS. Under the terms
+// Copyright 2009-2026 NTESS. Under the terms
 // of Contract DE-NA0003525 with NTESS, the U.S.
 // Government retains certain rights in this software.
 //
-// Copyright (c) 2009-2025, NTESS
+// Copyright (c) 2009-2026, NTESS
 // All rights reserved.
 //
 // Portions are copyright of other developers:
@@ -27,9 +27,10 @@ public:
     VanadisReadSyscall( VanadisNodeOSComponent* os, SST::Link* coreLink, OS::ProcessInfo* process, VanadisSyscallReadEvent* event  )
         : VanadisSyscall( os, coreLink, process, event, "read" ), m_numRead(0), m_eof(false)
     {
+        #ifdef VANADIS_BUILD_DEBUG
         m_output->verbose(CALL_INFO, 16, 0, "-> call is read( %" PRId64 ", 0x%0" PRI_ADDR ", %" PRId64 " )\n",
                             event->getFileDescriptor(), event->getBufferAddress(), event->getBufferCount());
-
+        #endif
         m_fd = process->getFileDescriptor( event->getFileDescriptor());
         if (-1 == m_fd ) {
             m_output->verbose(CALL_INFO, 16, 0,
@@ -52,7 +53,9 @@ public:
 
         m_data.resize(length);
         ssize_t retval = read( m_fd, m_data.data(), length );
+        #ifdef VANADIS_BUILD_DEBUG
         m_output->verbose(CALL_INFO, 16, 0,"SST %zu = read( %d, %zu)\n",retval,m_fd,length);
+        #endif
         assert(retval>=0);
 
         if ( retval ) {
@@ -63,7 +66,9 @@ public:
             m_numRead += retval;
 
             if ( retval < length ) {
+                #ifdef VANADIS_BUILD_DEBUG
                 m_output->verbose(CALL_INFO, 16, 0,"read EOF\n");
+                #endif
                 m_eof = true;
             }
         } else {

@@ -1,8 +1,8 @@
-// Copyright 2009-2025 NTESS. Under the terms
+// Copyright 2009-2026 NTESS. Under the terms
 // of Contract DE-NA0003525 with NTESS, the U.S.
 // Government retains certain rights in this software.
 //
-// Copyright (c) 2009-2025, NTESS
+// Copyright (c) 2009-2026, NTESS
 // All rights reserved.
 //
 // Portions are copyright of other developers:
@@ -107,7 +107,9 @@ public:
     }
 
     void clearByHWThreadID(SST::Output* output, const uint16_t hw_thr) {
+        #ifdef VANADIS_BUILD_DEBUG
         output->verbose(CALL_INFO, 16, 0, "-> Function Unit, clearing by hardware thread %" PRIu32 "...\n", hw_thr);
+        #endif
 
         for (auto q_itr = pending_execute.begin(); q_itr != pending_execute.end();) {
             // if we get a hardware thread match, remove and carry out

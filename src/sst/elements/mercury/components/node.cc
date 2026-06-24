@@ -1,8 +1,8 @@
-// Copyright 2009-2025 NTESS. Under the terms
+// Copyright 2009-2026 NTESS. Under the terms
 // of Contract DE-NA0003525 with NTESS, the U.S.
 // Government retains certain rights in this software.
 //
-// Copyright (c) 2009-2025, NTESS
+// Copyright (c) 2009-2026, NTESS
 // All rights reserved.
 //
 // Portions are copyright of other developers:
@@ -15,6 +15,7 @@
 
 #include <mercury/components/node.h>
 #include <mercury/components/operating_system.h>
+#include <mercury/components/nic.h>
 #include <mercury/operating_system/launch/app_launch_request.h>
 #include <mercury/operating_system/process/app.h>
 
@@ -27,16 +28,18 @@ extern template SST::TimeConverter HgBase<SST::Component>::time_converter_;
 Node::Node(ComponentId_t id, Params &params)
     : SST::Hg::NodeBase(id,params) {
   out_->debug(CALL_INFO, 1, 0, "loading hg.operating_system\n");
-  os_ = loadUserSubComponent<OperatingSystem>(
-      "os_slot", SST::ComponentInfo::SHARE_NONE, this);
+  os_ = loadUserSubComponent<OperatingSystemAPI>(
+      "os_slot", SST::ComponentInfo::SHARE_NONE);
   assert(os_);
+  os_->setParentNode(this);
 
   link_control_ = loadUserSubComponent<SST::Interfaces::SimpleNetwork>(
       "link_control_slot", SST::ComponentInfo::SHARE_NONE, 1);
   if (link_control_) {
     out_->debug(CALL_INFO, 1, 0, "loading hg.NIC\n");
-    nic_ = loadUserSubComponent<NIC>("nic_slot", SST::ComponentInfo::SHARE_NONE, this);
+    nic_ = loadUserSubComponent<NicAPI>("nic_slot", SST::ComponentInfo::SHARE_NONE);
     assert(nic_);
+    nic_->set_parent(this);
     nic_->set_link_control(link_control_);
   }
   else {

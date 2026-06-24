@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 #
-# Copyright 2009-2025 NTESS. Under the terms
+# Copyright 2009-2026 NTESS. Under the terms
 # of Contract DE-NA0003525 with NTESS, the U.S.
 # Government retains certain rights in this software.
 #
-# Copyright (c) 2009-2025, NTESS
+# Copyright (c) 2009-2026, NTESS
 # All rights reserved.
 #
 # Portions are copyright of other developers:
@@ -956,7 +956,7 @@ class System(TemplateBase):
     def build(self):
         # For any unallocated nodes, use EmptyJob
         if len(self._available_nodes) > 0:
-            remainder = EmptyJob(-1,len(self._available_nodes))
+            remainder = EmptyJob(-1,len(self._available_nodes) * self.allocation_block_size)
             remainder.network_interface = self.topology.router.getDefaultNetworkInterface()
             remainder.network_interface.link_bw = "1 GB/s"
             self.allocateNodes(remainder,"linear");

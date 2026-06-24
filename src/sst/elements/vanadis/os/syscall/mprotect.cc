@@ -1,8 +1,8 @@
-// Copyright 2009-2025 NTESS. Under the terms
+// Copyright 2009-2026 NTESS. Under the terms
 // of Contract DE-NA0003525 with NTESS, the U.S.
 // Government retains certain rights in this software.
 //
-// Copyright (c) 2009-2025, NTESS
+// Copyright (c) 2009-2026, NTESS
 // All rights reserved.
 //
 // Portions are copyright of other developers:
@@ -23,8 +23,10 @@ using namespace SST::Vanadis;
 VanadisMprotectSyscall::VanadisMprotectSyscall( VanadisNodeOSComponent* os, SST::Link* coreLink, OS::ProcessInfo* process, VanadisSyscallMprotectEvent* event)
     : VanadisSyscall( os, coreLink, process, event, "mprotect" )
 {
+    #ifdef VANADIS_BUILD_DEBUG
     m_output->verbose(CALL_INFO, 2, VANADIS_OS_DBG_SYSCALL, "[syscall-mprotect] core %d thread %d process %d addr=%" PRIx64 " len=%" PRIu64 " prot=%#" PRIx64 "\n",
             event->getCoreID(), event->getThreadID(), process->getpid(), event->getAddr(), event->getLen(), event->getProt() );
+    #endif
 
     int perms = 0;
     if ( event->getProt() & PROT_READ ) {

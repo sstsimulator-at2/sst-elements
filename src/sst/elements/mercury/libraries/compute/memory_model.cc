@@ -1,8 +1,8 @@
-// Copyright 2009-2025 NTESS. Under the terms
+// Copyright 2009-2026 NTESS. Under the terms
 // of Contract DE-NA0003525 with NTESS, the U.S.
 // Government retains certain rights in this software.
 //
-// Copyright (c) 2009-2025, NTESS
+// Copyright (c) 2009-2026, NTESS
 // All rights reserved.
 //
 // Portions are copyright of other developers:
@@ -16,7 +16,7 @@
 #include <inttypes.h>
 #include <mercury/libraries/compute/memory_model.h>
 #include <mercury/components/operating_system.h>
-#include <mercury/components/node_CL.h>
+#include <mercury/components/compute_library/node_cl.h>
 
 namespace SST {
 namespace Hg {

@@ -1,8 +1,8 @@
-// Copyright 2009-2025 NTESS. Under the terms
+// Copyright 2009-2026 NTESS. Under the terms
 // of Contract DE-NA0003525 with NTESS, the U.S.
 // Government retains certain rights in this software.
 //
-// Copyright (c) 2009-2025, NTESS
+// Copyright (c) 2009-2026, NTESS
 // All rights reserved.
 //
 // Portions are copyright of other developers:
@@ -89,12 +89,14 @@ public:
             const register_format result_lo       = (register_format)(multiply_result & lo_mask);
             const register_format result_hi       = (register_format)(multiply_result >> (sizeof(register_format) * 8));
 
+            #ifdef VANADIS_BUILD_DEBUG
             if(output->getVerboseLevel() >= 16) {
                 std::ostringstream ss;
                 ss << "-> Execute: 0x" << std::hex << getInstructionAddress() << std::dec << " " << getInstCode();
                 ss << " " << src_1 <<" * " << src_2 << " = "<< multiply_result << " = (lo: " << result_lo << ", hi: " << result_hi;
                 output->verbose( CALL_INFO, 16, 0, "%s\n", ss.str().c_str());
             }
+            #endif
 
             regFile->setIntReg<register_format>(phys_int_regs_out[0], result_lo);
             regFile->setIntReg<register_format>(phys_int_regs_out[1], result_hi);
@@ -103,12 +105,14 @@ public:
             const register_format result_lo       = (register_format)(multiply_result & lo_mask);
             const register_format result_hi       = (register_format)(multiply_result >> (sizeof(register_format) * 8));
 
+            #ifdef VANADIS_BUILD_DEBUG
             if(output->getVerboseLevel() >= 16) {
                 std::ostringstream ss;
                 ss << "-> Execute: 0x" << std::hex << getInstructionAddress() << std::dec << " " << getInstCode();
                 ss << " " << src_1 <<" * " << src_2 << " = "<< multiply_result << " = (lo: " << result_lo << ", hi: " << result_hi;
                 output->verbose( CALL_INFO, 16, 0, "%s\n", ss.str().c_str());
             }
+            #endif
 
             regFile->setIntReg<register_format>(phys_int_regs_out[0], result_lo);
             regFile->setIntReg<register_format>(phys_int_regs_out[1], result_hi);

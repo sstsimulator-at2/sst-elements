@@ -1,8 +1,8 @@
-// Copyright 2009-2025 NTESS. Under the terms
+// Copyright 2009-2026 NTESS. Under the terms
 // of Contract DE-NA0003525 with NTESS, the U.S.
 // Government retains certain rights in this software.
 //
-// Copyright (c) 2009-2025, NTESS
+// Copyright (c) 2009-2026, NTESS
 // All rights reserved.
 //
 // Portions are copyright of other developers:
@@ -147,6 +147,7 @@ public:
 
         mem_addr_reg_val = regFile->getIntReg<uint64_t>(phys_int_regs_in[0]);
 
+        #ifdef VANADIS_BUILD_DEBUG
         switch ( regType ) {
         case LOAD_INT_REGISTER:
         {
@@ -173,7 +174,6 @@ public:
         } break;
         }
 
-        #ifdef VANADIS_BUILD_DEBUG
         // if(output->getVerboseLevel() >= 16)
         {
             output->verbose(

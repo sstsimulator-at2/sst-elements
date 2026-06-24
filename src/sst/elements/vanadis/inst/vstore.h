@@ -1,8 +1,8 @@
-// Copyright 2009-2025 NTESS. Under the terms
+// Copyright 2009-2026 NTESS. Under the terms
 // of Contract DE-NA0003525 with NTESS, the U.S.
 // Government retains certain rights in this software.
 //
-// Copyright (c) 2009-2025, NTESS
+// Copyright (c) 2009-2026, NTESS
 // All rights reserved.
 //
 // Portions are copyright of other developers:
@@ -142,6 +142,7 @@ public:
         (*store_addr) = (uint64_t)(reg_tmp + offset);
         (*op_width)   = store_width;
 
+        #ifdef VANADIS_BUILD_DEBUG
         switch ( regType ) {
         case STORE_INT_REGISTER:
         {
@@ -162,6 +163,8 @@ public:
                 (*store_addr));
         } break;
         }
+        #endif
+
     }
 
     uint16_t getStoreWidth() const { return store_width; }

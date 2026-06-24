@@ -1,8 +1,8 @@
-// Copyright 2009-2025 NTESS. Under the terms
+// Copyright 2009-2026 NTESS. Under the terms
 // of Contract DE-NA0003525 with NTESS, the U.S.
 // Government retains certain rights in this software.
 //
-// Copyright (c) 2009-2025, NTESS
+// Copyright (c) 2009-2026, NTESS
 // All rights reserved.
 //
 // Portions are copyright of other developers:
@@ -307,9 +307,18 @@ uint64_t VirtMemMap::addRegion(
     std::fflush(stdout);
 
     if ( start ) {
-        assert( free_list_->alloc( start, length ) );
+        if ( !free_list_->alloc( start, length ) ) {
+            printf("Error: %s, unable to allocate a block for addr=%#" PRIx64 " size=%zu\n", name.c_str(), start, length );
+            std::fflush(stdout);
+            assert(0);
+        }
     } else {
-        assert( start = free_list_->alloc( length ) );
+        start = free_list_->alloc( length );
+        if (! start ) {
+            printf("Error: %s, unable to allocate a block of size=%zu\n", name.c_str(), length);
+            std::fflush(stdout);
+            assert(start);
+        }
     }
 
     region_map_[start] = new MemoryRegion( name, start, length, perms, backing );

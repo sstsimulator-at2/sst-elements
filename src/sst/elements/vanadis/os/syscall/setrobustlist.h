@@ -1,8 +1,8 @@
-// Copyright 2009-2025 NTESS. Under the terms
+// Copyright 2009-2026 NTESS. Under the terms
 // of Contract DE-NA0003525 with NTESS, the U.S.
 // Government retains certain rights in this software.
 //
-// Copyright (c) 2009-2025, NTESS
+// Copyright (c) 2009-2026, NTESS
 // All rights reserved.
 //
 // Portions are copyright of other developers:
@@ -27,8 +27,9 @@ public:
     VanadisSetRobustListSyscall( VanadisNodeOSComponent* os, SST::Link* coreLink, OS::ProcessInfo* process, VanadisSyscallSetRobustListEvent* event )
         : VanadisSyscall( os, coreLink, process, event, "set_robust_list" )
     {
+        #ifdef VANADIS_BUILD_DEBUG
         m_output->verbose(CALL_INFO, 2, VANADIS_OS_DBG_SYSCALL, "[syscall-set_robust_list] head %#" PRIx64 ", len=%" PRIu64 "\n", event->getHead(),event->getLen());
-
+        #endif
 //        process->setRobustList( event->getRobustList() );
 
         setReturnSuccess(0);

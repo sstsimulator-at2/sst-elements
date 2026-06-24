@@ -1,8 +1,8 @@
-// Copyright 2009-2025 NTESS. Under the terms
+// Copyright 2009-2026 NTESS. Under the terms
 // of Contract DE-NA0003525 with NTESS, the U.S.
 // Government retains certain rights in this software.
 //
-// Copyright (c) 2009-2025, NTESS
+// Copyright (c) 2009-2026, NTESS
 // All rights reserved.
 //
 // Portions are copyright of other developers:
@@ -43,8 +43,8 @@ NodeBase::NodeBase(ComponentId_t id, Params &params)
 void
 NodeBase::init(unsigned int phase)
 {
-  os_->set_nranks(nranks_);
-  os_->set_npernode(npernode_);
+  os_->setNumRanks(nranks_);
+  os_->setRanksPerNode(npernode_);
   os_->init(phase);
   if (nic_) nic_->init(phase);
 }

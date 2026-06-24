@@ -1,8 +1,8 @@
-// Copyright 2009-2025 NTESS. Under the terms
+// Copyright 2009-2026 NTESS. Under the terms
 // of Contract DE-NA0003525 with NTESS, the U.S.
 // Government retains certain rights in this software.
 //
-// Copyright (c) 2009-2025, NTESS
+// Copyright (c) 2009-2026, NTESS
 // All rights reserved.
 //
 // Portions are copyright of other developers:
@@ -30,10 +30,11 @@ public:
         uint64_t sim_seconds = (uint64_t)(sim_time_ns / 1000000000ULL);
         uint32_t sim_ns = (uint32_t)(sim_time_ns % 1000000000ULL);
 
+        #ifdef VANADIS_BUILD_DEBUG
         m_output->verbose(CALL_INFO, 16, 0,
                             "[syscall-gettime64] --> sim-time: %" PRIu64 " ns -> %" PRIu64 " secs + %" PRIu32 " us\n",
                             sim_time_ns, sim_seconds, sim_ns);
-
+        #endif
 
         if ( VanadisOSBitType::VANADIS_OS_64B == event->getOSBitType() ) {
             payload.resize( 16 );

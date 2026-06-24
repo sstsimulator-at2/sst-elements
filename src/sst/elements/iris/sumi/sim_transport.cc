@@ -1,8 +1,8 @@
-// Copyright 2009-2025 NTESS. Under the terms
+// Copyright 2009-2026 NTESS. Under the terms
 // of Contract DE-NA0003525 with NTESS, the U.S.
 // Government retains certain rights in this software.
 //
-// Copyright (c) 2009-2025, NTESS
+// Copyright (c) 2009-2026, NTESS
 // All rights reserved.
 //
 // Portions are copyright of other developers:
@@ -210,7 +210,7 @@ SimTransport::SimTransport(SST::Params& params, SST::Hg::App* parent) :
   page_size_ = params.find<SST::UnitAlgebra>("rdma_page_size", "4096 B").getRoundedValue();
 
   output.output("%d", sid().app_);
-  nproc_ = os_->nranks();
+  nproc_ = os_->numRanks();
 
   auto qos_params = params.get_scoped_params("qos");
   auto qos_name = qos_params.find<std::string>("name", "null");

@@ -1,8 +1,8 @@
-// Copyright 2009-2025 NTESS. Under the terms
+// Copyright 2009-2026 NTESS. Under the terms
 // of Contract DE-NA0003525 with NTESS, the U.S.
 // Government retains certain rights in this software.
 //
-// Copyright (c) 2009-2025, NTESS
+// Copyright (c) 2009-2026, NTESS
 // All rights reserved.
 //
 // Portions are copyright of other developers:
@@ -27,8 +27,10 @@ public:
     VanadisLseekSyscall( VanadisNodeOSComponent* os, SST::Link* coreLink, OS::ProcessInfo* process, VanadisSyscallLseekEvent* event )
         : VanadisSyscall( os, coreLink, process, event, "lseek" )
     {
+        #ifdef VANADIS_BUILD_DEBUG
         m_output->verbose(CALL_INFO, 16, 0, "[syscall-lseek] -> call is lseek( %" PRId32 " %" PRId64 " %" PRId32 " )\n",
                 event->getFileDescriptor(), event->getOffset(), event->getWhence() );
+        #endif
 
         int fd = process->getFileDescriptor( event->getFileDescriptor() );
         if ( -1 == fd ) {
@@ -41,7 +43,9 @@ public:
          } else {
 
             off_t ret = lseek( fd, (off_t) event->getOffset(), (int) event->getWhence() );
+            #ifdef VANADIS_BUILD_DEBUG
             m_output->verbose(CALL_INFO, 16, 0, "[syscall-lseek] ret=%" PRIu64 "\n",ret );
+            #endif
             if ( -1 == ret  ) {
                 // need to map host errno values to vanadis exe errno values
                 assert(0);

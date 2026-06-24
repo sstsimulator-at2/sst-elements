@@ -1,8 +1,8 @@
-// Copyright 2009-2025 NTESS. Under the terms
+// Copyright 2009-2026 NTESS. Under the terms
 // of Contract DE-NA0003525 with NTESS, the U.S.
 // Government retains certain rights in this software.
 //
-// Copyright (c) 2009-2025, NTESS
+// Copyright (c) 2009-2026, NTESS
 // All rights reserved.
 //
 // Portions are copyright of other developers:
@@ -27,14 +27,17 @@ public:
     VanadisUnlinkSyscall( VanadisNodeOSComponent* os, SST::Link* coreLink, OS::ProcessInfo* process, VanadisSyscallUnlinkEvent* event )
         : VanadisSyscall( os, coreLink, process, event, "unlink" )
     {
+        #ifdef VANADIS_BUILD_DEBUG
         m_output->verbose( CALL_INFO, 16, 0, "[syscall-unlink] -> call is unlink( %" PRId64 " )\n", event->getPathPointer());
+        #endif
 
         readString(event->getPathPointer(),filename);
     }
 
     void memReqIsDone(bool) {
+        #ifdef VANADIS_BUILD_DEBUG
         m_output->verbose(CALL_INFO, 16, 0, "[syscall-unlink] path: \"%s\"\n", filename.c_str());
-
+        #endif
         if ( unlink( filename.c_str() ) ) {
             auto myErrno = errno;
             char buf[100];

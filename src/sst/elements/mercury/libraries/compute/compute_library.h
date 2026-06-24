@@ -1,8 +1,8 @@
-// Copyright 2009-2025 NTESS. Under the terms
+// Copyright 2009-2026 NTESS. Under the terms
 // of Contract DE-NA0003525 with NTESS, the U.S.
 // Government retains certain rights in this software.
 //
-// Copyright (c) 2009-2025, NTESS
+// Copyright (c) 2009-2026, NTESS
 // All rights reserved.
 //
 // Portions are copyright of other developers:
@@ -16,7 +16,7 @@
 #pragma once
 
 #include <mercury/common/errors.h>
-#include <mercury/components/operating_system_CL.h>
+#include <mercury/components/compute_library/operating_system_cl_api.h>
 #include <mercury/operating_system/libraries/library.h>
 #include <mercury/libraries/compute/compute_api.h>
 #include <mercury/libraries/compute/compute_event.h>
@@ -63,7 +63,7 @@ class ComputeLibrary : public ComputeAPI, public Library
   void computeInst(ComputeEvent* cmsg, int nthr);
 
 private:
-  OperatingSystemCL* parent_os_;
+  OperatingSystemCLAPI* parent_os_;
   int access_width_bytes_;
   double loop_overhead_;
 };

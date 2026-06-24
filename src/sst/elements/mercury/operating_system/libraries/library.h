@@ -1,8 +1,8 @@
-// Copyright 2009-2025 NTESS. Under the terms
+// Copyright 2009-2026 NTESS. Under the terms
 // of Contract DE-NA0003525 with NTESS, the U.S.
 // Government retains certain rights in this software.
 //
-// Copyright (c) 2009-2025, NTESS
+// Copyright (c) 2009-2026, NTESS
 // All rights reserved.
 //
 // Portions are copyright of other developers:
@@ -29,6 +29,12 @@
 
 namespace SST {
 namespace Hg {
+
+class Request;
+class OperatingSystemAPI;
+
+void apiLock();
+void apiUnlock();
 
 class Library
 {
@@ -75,14 +81,30 @@ class Library
    */
   void endLibraryCall();
 
+  const std::string& libName() const {
+    return libname_;
+  }
+
+  std::string toString() const {
+    return libname_;
+  }
+
+  virtual void incomingRequest(Request* req);
+  virtual void incomingEvent(Event* ev);
+
+  Library(const std::string& libname, SoftwareId sid, OperatingSystemAPI* os);
+
  protected:
+  OperatingSystemAPI* os_;
+  SoftwareId sid_;
+  NodeId addr_;
+
   Library(SST::Params& params, App* parent);
   App* api_parent_app_;
 
+ private:
+  std::string libname_;
 };
-
-void apiLock();
-void apiUnlock();
 
 } // end namespace Hg
 } // end namespace SST

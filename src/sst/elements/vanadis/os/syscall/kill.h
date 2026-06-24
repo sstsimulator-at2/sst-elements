@@ -1,8 +1,8 @@
-// Copyright 2009-2025 NTESS. Under the terms
+// Copyright 2009-2026 NTESS. Under the terms
 // of Contract DE-NA0003525 with NTESS, the U.S.
 // Government retains certain rights in this software.
 //
-// Copyright (c) 2009-2025, NTESS
+// Copyright (c) 2009-2026, NTESS
 // All rights reserved.
 //
 // Portions are copyright of other developers:
@@ -27,6 +27,7 @@ public:
     VanadisKillSyscall( VanadisNodeOSComponent* os, SST::Link* coreLink, OS::ProcessInfo* process, VanadisSyscallKillEvent* event )
         : VanadisSyscall( os, coreLink, process, event, "kill" )
     {
+        // TODO kill running process and shutdown gracefully
         m_output->verbose(CALL_INFO, 0, 0, "[syscall-kill] ---> pid=%" PRIu64 " sig=%" PRIu64 "\n", event->getPid(), event->getSig() );
         assert(0);
     }

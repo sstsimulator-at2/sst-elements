@@ -1,8 +1,8 @@
-// Copyright 2009-2025 NTESS. Under the terms
+// Copyright 2009-2026 NTESS. Under the terms
 // of Contract DE-NA0003525 with NTESS, the U.S.
 // Government retains certain rights in this software.
 //
-// Copyright (c) 2009-2025, NTESS
+// Copyright (c) 2009-2026, NTESS
 // All rights reserved.
 //
 // Portions are copyright of other developers:
@@ -27,7 +27,9 @@ public:
     VanadisGetcpuSyscall( VanadisNodeOSComponent* os, SST::Link* coreLink, OS::ProcessInfo* process, VanadisSyscallGetxEvent* event )
         : VanadisSyscall( os, coreLink, process, event, "getcpu" )
     {
+        #ifdef VANADIS_BUILD_DEBUG
         m_output->verbose(CALL_INFO, 16, 0, "[syscall-getcpu] cpu=%u hwThread=%u\n",process->getCore(),process->getHwThread());
+        #endif
 
         uint32_t logicalCore = process->getCore() * os->getNumHwThreads() + process->getHwThread();
         setReturnSuccess(logicalCore);

@@ -1,8 +1,8 @@
-// Copyright 2009-2025 NTESS. Under the terms
+// Copyright 2009-2026 NTESS. Under the terms
 // of Contract DE-NA0003525 with NTESS, the U.S.
 // Government retains certain rights in this software.
 //
-// Copyright (c) 2009-2025, NTESS
+// Copyright (c) 2009-2026, NTESS
 // All rights reserved.
 //
 // Portions are copyright of other developers:
@@ -27,9 +27,10 @@ public:
     VanadisGetaffinitySyscall( VanadisNodeOSComponent* os, SST::Link* coreLink, OS::ProcessInfo* process, VanadisSyscallGetaffinityEvent* event )
         : VanadisSyscall( os, coreLink, process, event, "getaffinity" ), m_cpusetSize(event->getCpusetsize())
     {
+        #ifdef VANADIS_BUILD_DEBUG
         m_output->verbose(CALL_INFO, 2, VANADIS_OS_DBG_SYSCALL, "[syscall-getaffinity] uname pid=%" PRIu64 " cpusetsize=%" PRIu64 " maskAddr=%#" PRIx64 "\n",
                                             event->getPid(), event->getCpusetsize(), event->getMaskAddr());
-
+        #endif
         m_mask.resize(m_cpusetSize, 0);
         std::vector<uint8_t> affinity = m_process->getAffinity();
         m_mask.assign(affinity.begin(), affinity.end());

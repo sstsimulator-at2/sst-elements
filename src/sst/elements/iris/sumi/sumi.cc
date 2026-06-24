@@ -1,5 +1,5 @@
 /**
-Copyright 2009-2025 National Technology and Engineering Solutions of Sandia,
+Copyright 2009-2026 National Technology and Engineering Solutions of Sandia,
 LLC (NTESS).  Under the terms of Contract DE-NA-0003525, the U.S. Government
 retains certain rights in this software.
 
@@ -8,7 +8,7 @@ by National Technology and Engineering Solutions of Sandia, LLC., a wholly
 owned subsidiary of Honeywell International, Inc., for the U.S. Department of
 Energy's National Nuclear Security Administration under contract DE-NA0003525.
 
-Copyright (c) 2009-2025, NTESS
+Copyright (c) 2009-2026, NTESS
 
 All rights reserved.
 
@@ -43,7 +43,7 @@ Questions? Contact sst-macro-help@sandia.gov
 */
 
 #include <mercury/operating_system/process/app.h>
-#include <mercury/components/operating_system.h>
+#include <mercury/components/compute_library/operating_system_cl.h>
 #include <mercury/common/util.h>
 #include <mercury/common/loader.h>
 #include <iris/sumi/transport.h>
@@ -176,7 +176,7 @@ Message* comm_poll()
 
 double wall_time()
 {
-  return OperatingSystem::currentOs()->now().sec();
+  return Hg::OperatingSystemCL::currentOs()->now().sec();
 }
 
 }

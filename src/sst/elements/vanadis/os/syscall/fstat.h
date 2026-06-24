@@ -1,8 +1,8 @@
-// Copyright 2009-2025 NTESS. Under the terms
+// Copyright 2009-2026 NTESS. Under the terms
 // of Contract DE-NA0003525 with NTESS, the U.S.
 // Government retains certain rights in this software.
 //
-// Copyright (c) 2009-2025, NTESS
+// Copyright (c) 2009-2026, NTESS
 // All rights reserved.
 //
 // Portions are copyright of other developers:
@@ -67,8 +67,9 @@ public:
     VanadisFstatSyscall( VanadisNodeOSComponent* os, SST::Link* coreLink, OS::ProcessInfo* process, VanadisSyscallFstatEvent* event )
         : VanadisSyscall( os, coreLink, process, event, "fstat" )
     {
+        #ifdef VANADIS_BUILD_DEBUG
 	    m_output->verbose(CALL_INFO, 16, 0, "-> call is fstat( %d, 0x%0" PRI_ADDR " )\n", event->getFileHandle(), event->getStructAddress());
-
+        #endif
         setReturnFail(-LINUX_EINVAL);
 
  #if 0

@@ -1,8 +1,8 @@
-// Copyright 2009-2025 NTESS. Under the terms
+// Copyright 2009-2026 NTESS. Under the terms
 // of Contract DE-NA0003525 with NTESS, the U.S.
 // Government retains certain rights in this software.
 //
-// Copyright (c) 2009-2025, NTESS
+// Copyright (c) 2009-2026, NTESS
 // All rights reserved.
 //
 // Portions are copyright of other developers:
@@ -74,7 +74,9 @@ public:
     virtual void scalarExecute(SST::Output* output, VanadisRegisterFile* regFile) override
     {
         uint16_t phys_int_regs_out_0 = getPhysIntRegOut(0);
+        #ifdef VANADIS_BUILD_DEBUG
         log(output, 16, 65535,phys_int_regs_out_0);
+        #endif
         instOp(regFile,phys_int_regs_out_0);
         markExecuted();
     }

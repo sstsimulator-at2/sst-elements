@@ -1,8 +1,8 @@
-// Copyright 2009-2025 NTESS. Under the terms
+// Copyright 2009-2026 NTESS. Under the terms
 // of Contract DE-NA0003525 with NTESS, the U.S.
 // Government retains certain rights in this software.
 //
-// Copyright (c) 2009-2025, NTESS
+// Copyright (c) 2009-2026, NTESS
 // All rights reserved.
 //
 // Portions are copyright of other developers:
@@ -31,8 +31,10 @@ public:
         VanadisSyscallSetaffinityEvent* event )
     : VanadisSyscall(os, coreLink, process, event, "setaffinity")
     {
+        #ifdef VANADIS_BUILD_DEBUG
         m_output->verbose(CALL_INFO, 2, VANADIS_OS_DBG_SYSCALL, "[syscall-setaffinity] pid=%" PRIu64 " cpusetsize=%" PRIu64 " maskAddr=%#" PRIx64 "\n",
                                       event->getPid(), event->getCpusetsize(), event->getMaskAddr());
+        #endif
 
         // Load the CPU mask from memory
         m_mask.resize(event->getCpusetsize(), 0);

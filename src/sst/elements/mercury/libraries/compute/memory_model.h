@@ -1,8 +1,8 @@
-// Copyright 2009-2025 NTESS. Under the terms
+// Copyright 2009-2026 NTESS. Under the terms
 // of Contract DE-NA0003525 with NTESS, the U.S.
 // Government retains certain rights in this software.
 //
-// Copyright (c) 2009-2025, NTESS
+// Copyright (c) 2009-2026, NTESS
 // All rights reserved.
 //
 // Portions are copyright of other developers:
@@ -16,7 +16,7 @@
 #pragma once
 
 #include <mercury/common/events.h>
-#include <mercury/components/node_CL_fwd.h>
+#include <mercury/components/compute_library/node_cl_fwd.h>
 #include <mercury/common/unique_id.h>
 #include <mercury/libraries/compute/compute_event.h>
 

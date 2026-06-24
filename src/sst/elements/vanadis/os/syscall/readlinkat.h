@@ -1,8 +1,8 @@
-// Copyright 2009-2025 NTESS. Under the terms
+// Copyright 2009-2026 NTESS. Under the terms
 // of Contract DE-NA0003525 with NTESS, the U.S.
 // Government retains certain rights in this software.
 //
-// Copyright (c) 2009-2025, NTESS
+// Copyright (c) 2009-2026, NTESS
 // All rights reserved.
 //
 // Portions are copyright of other developers:
@@ -27,8 +27,10 @@ public:
     VanadisReadlinkatSyscall( VanadisNodeOSComponent* os, SST::Link* coreLink, OS::ProcessInfo* process, VanadisSyscallReadLinkAtEvent* event )
         : VanadisSyscall( os, coreLink, process, event, "readlinkat" ), m_data( event->getBufsize()), m_state(READ)
     {
+        #ifdef VANADIS_BUILD_DEBUG
         m_output->verbose(CALL_INFO, 2, VANADIS_OS_DBG_SYSCALL, "[syscall-readlinkat] -> readlinkat( dirfd=%" PRIu64 " pathname=%#" PRIx64 " buf=%#" PRIx64 " size=%" PRIu64 ")\n",
                                 event->getDirfd(), event->getPathname(), event->getBuf(), event->getBufsize());
+        #endif
 
         m_dirFd  = event->getDirfd();
         // if the directory fd passed by the syscall is positive it should point to a entry in the file_descriptor table

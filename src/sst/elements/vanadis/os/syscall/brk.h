@@ -1,8 +1,8 @@
-// Copyright 2009-2025 NTESS. Under the terms
+// Copyright 2009-2026 NTESS. Under the terms
 // of Contract DE-NA0003525 with NTESS, the U.S.
 // Government retains certain rights in this software.
 //
-// Copyright (c) 2009-2025, NTESS
+// Copyright (c) 2009-2026, NTESS
 // All rights reserved.
 //
 // Portions are copyright of other developers:
@@ -30,18 +30,22 @@ public:
         uint64_t brk = process->getBrk();
         if (event->getUpdatedBRK() < brk) {
 
+            #ifdef VANADIS_BUILD_DEBUG
             m_output->verbose(CALL_INFO, 2, VANADIS_OS_DBG_SYSCALL,
                                 "[syscall-brk]: brk provided (0x%" PRI_ADDR ") is less than existing brk "
                                 "point (0x%" PRI_ADDR "), so returning current brk point\n",
                                 event->getUpdatedBRK(), brk);
+            #endif
         } else {
             if ( ! process->setBrk( event->getUpdatedBRK() ) ) {
                 m_output->fatal(CALL_INFO, -1, "-> error: brk() %#" PRIx64 " ran out of memory\n",event->getUpdatedBRK());
             }
 
+            #ifdef VANADIS_BUILD_DEBUG
             m_output->verbose(CALL_INFO, 2, VANADIS_OS_DBG_SYSCALL,
                                 "[syscall-brk] old brk: 0x%" PRI_ADDR " -> new brk: 0x%" PRI_ADDR " (diff: %" PRIu64 ")\n", brk,
                                 event->getUpdatedBRK(), (event->getUpdatedBRK() - brk));
+            #endif
             process->printRegions( "after brk" );
         }
 

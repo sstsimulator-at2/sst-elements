@@ -1,8 +1,8 @@
-// Copyright 2009-2025 NTESS. Under the terms
+// Copyright 2009-2026 NTESS. Under the terms
 // of Contract DE-NA0003525 with NTESS, the U.S.
 // Government retains certain rights in this software.
 //
-// Copyright (c) 2009-2025, NTESS
+// Copyright (c) 2009-2026, NTESS
 // All rights reserved.
 //
 // Portions are copyright of other developers:
@@ -22,14 +22,16 @@
 #include <mercury/common/timestamp.h>
 #include <mercury/operating_system/process/thread_fwd.h>
 #include <mercury/components/operating_system_fwd.h>
+#include <mercury/components/operating_system_impl.h>
 
 namespace SST {
 namespace Hg {
 
 struct ProgressQueue {
-  OperatingSystem* os;
+public:
+  OperatingSystemAPI* os;
 
-  ProgressQueue(OperatingSystem* os) : os(os)
+  ProgressQueue(OperatingSystemAPI* os) : os(os)
   {
   }
 
@@ -43,7 +45,7 @@ struct SingleProgressQueue : public ProgressQueue {
   std::queue<Item*> items;
   std::list<Thread*> pending_threads;
 
-  SingleProgressQueue(OperatingSystem* os) :
+  SingleProgressQueue(OperatingSystemAPI* os) :
     ProgressQueue(os)
   {
   }
@@ -85,7 +87,7 @@ struct SingleProgressQueue : public ProgressQueue {
 
 struct PollingQueue : public ProgressQueue {
   public:
-   PollingQueue(OperatingSystem* os) :
+   PollingQueue(OperatingSystemAPI* os) :
      ProgressQueue(os),
      num_empty_calls_(0)
    {
@@ -107,7 +109,7 @@ struct PollingQueue : public ProgressQueue {
 
 template <class Item>
 struct PollingProgressQueue : public PollingQueue {
-  PollingProgressQueue(OperatingSystem* os) :
+  PollingProgressQueue(OperatingSystemAPI* os) :
     PollingQueue(os)
   {
   }
@@ -161,7 +163,7 @@ struct MultiProgressQueue : public ProgressQueue {
   std::map<int,std::list<Thread*>> pending_threads;
   OperatingSystem* os;
 
-  MultiProgressQueue(OperatingSystem* os) : ProgressQueue(os)
+  MultiProgressQueue(OperatingSystemAPI* os) : ProgressQueue(os)
   {
   }
 

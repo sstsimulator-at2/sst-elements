@@ -1,8 +1,8 @@
-// Copyright 2009-2025 NTESS. Under the terms
+// Copyright 2009-2026 NTESS. Under the terms
 // of Contract DE-NA0003525 with NTESS, the U.S.
 // Government retains certain rights in this software.
 //
-// Copyright (c) 2009-2025, NTESS
+// Copyright (c) 2009-2026, NTESS
 // All rights reserved.
 //
 // Portions are copyright of other developers:
@@ -27,14 +27,17 @@ public:
     VanadisAccessSyscall( VanadisNodeOSComponent* os, SST::Link* coreLink, OS::ProcessInfo* process, VanadisSyscallAccessEvent* event )
         : VanadisSyscall( os, coreLink, process, event, "access" )
     {
+        #ifdef VANADIS_BUILD_DEBUG
         m_output->verbose(CALL_INFO, 16, 0, "[syscall-access] access( 0x%" PRI_ADDR ", %" PRIu64 " )\n", event->getPathPointer(), event->getAccessMode());
+        #endif
 
         readString(event->getPathPointer(),m_filename);
     }
 
     void memReqIsDone(bool) {
+        #ifdef VANADIS_BUILD_DEBUG
         m_output->verbose(CALL_INFO, 16, 0, "-> [syscall-access] path is: \"%s\"\n", m_filename.c_str());
-
+        #endif
         int ret = access( m_filename.c_str(), getEvent<VanadisSyscallAccessEvent*>()->getAccessMode() );
         if ( ret ) {
             setReturnFail( -errno );
