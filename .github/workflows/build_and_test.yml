@@ -6,7 +6,7 @@ on:
   workflow_call:
 
 concurrency:
-  group: build-and-test-${{github.ref}}-${{github.event.pull_request.number || github.run_number}}
+  group: build_and_test-${{github.workflow}}-${{github.ref}}-${{github.event.pull_request.number || github.run_number}}
   cancel-in-progress: true
 
 permissions: {}
@@ -15,24 +15,39 @@ jobs:
   # Jobs depend on the output of pre-checks to run.
   # Cancels new workflows if prior runs were successful (same tree hash)
   pre-checks:
-    runs-on: ubuntu-24.04
-    # actions: write needed by skip-duplicate-actions
+    name: Determine if build/test should be performed
+    runs-on: ubuntu-26.04
     permissions:
-      actions: write
+      actions: write # needed by skip-duplicate-actions
     outputs:
       should_skip: ${{ steps.skip_check.outputs.should_skip }}
     steps:
       - id: skip_check
-        uses: fkirc/skip-duplicate-actions@f75f66ce1886f00957d99748a42c724f4330bdcf # v5.3.1
+        uses: fkirc/skip-duplicate-actions@b974a9395958c231af965b70070979a577efa578 # v5.3.2
         with:
           skip_after_successful_duplicate: 'true'
-  macos-14:
+  arch:
     needs: pre-checks
     if: ${{ needs.pre-checks.outputs.should_skip != 'true' }}
     uses:
-      ./.github/workflows/free-macos-14.yml
+      $/.github/workflows/free-arch.yml
   macos-15:
     needs: pre-checks
     if: ${{ needs.pre-checks.outputs.should_skip != 'true' }}
     uses:
-      ./.github/workflows/free-macos-15.yml
+      $/.github/workflows/free-macos-15.yml
+  macos-26:
+    needs: pre-checks
+    if: ${{ needs.pre-checks.outputs.should_skip != 'true' }}
+    uses:
+      $/.github/workflows/free-macos-26.yml
+  rocky8:
+    needs: pre-checks
+    if: ${{ needs.pre-checks.outputs.should_skip != 'true' }}
+    uses:
+      $/.github/workflows/free-rocky8.yml
+  rocky8-nompi:
+    needs: pre-checks
+    if: ${{ needs.pre-checks.outputs.should_skip != 'true' }}
+    uses:
+      $/.github/workflows/free-rocky8-nompi.yml

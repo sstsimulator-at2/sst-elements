@@ -6,13 +6,20 @@ on:
   workflow_call:
 
 concurrency:
-  group: style-${{github.ref}}-${{github.event.pull_request.number || github.run_number}}
+  group: pre-commit-${{github.workflow}}-${{github.ref}}-${{github.event.pull_request.number || github.run_number}}
   cancel-in-progress: true
+
+permissions: {}
 
 jobs:
   pre-commit:
-    runs-on: ubuntu-latest
+    name: Run pre-commit on current ref
+    runs-on: ubuntu-26.04
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-      - uses: pre-commit/action@v3.0.1
+      # Get this user's SST-elements repo/branch
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          # ref: ${{ github.event.pull_request.head.sha }}
+      # Run all the pre-commit checks: clang-format, cmake-format, ...
+      - uses: j178/prek-action@1382ad72dea72f9d53832f2bcb65b3e87a947204  # v3.0.1
