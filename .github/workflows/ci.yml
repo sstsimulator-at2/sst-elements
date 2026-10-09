@@ -33,6 +33,7 @@ jobs:
     uses: $/.github/workflows/build_and_test.yml
     permissions:
       actions: write # needed by skip-duplicate-actions
+      packages: write # to save ccache in ghcr.io
   all-tests:
     needs: [tests]
     name: CI success
