@@ -4,6 +4,13 @@ name: sst-core build/install/test
 # yamllint disable-line rule:truthy
 on:
   workflow_call:
+    inputs:
+      test-categories:
+        description: >-
+          Space-separated test categories; jobs that only run nightly need
+          "nightly" in it
+        default: pr
+        type: string
 
 concurrency:
   group: build_and_test-${{github.workflow}}-${{github.ref}}-${{github.event.pull_request.number || github.run_number}}
@@ -25,6 +32,7 @@ jobs:
       packages: write # to save ccache
     with:
       runs-on: ubuntu-26.04
+      test-categories: ${{ inputs.test-categories }}
       image: rockylinux/rockylinux:8.10@sha256:e8a49c5403b687db05d4d67333fa45808fbe74f36e683cec7abb1f7d0f2338c6
       test-ranks: 2
       ccache-key: rocky8-mpi-gcc
@@ -37,6 +45,7 @@ jobs:
       packages: write # to save ccache
     with:
       runs-on: ubuntu-26.04
+      test-categories: ${{ inputs.test-categories }}
       image: rockylinux/rockylinux:9
       ccache-key: rocky9-mpi-gcc
       ccache-save: true
@@ -48,6 +57,7 @@ jobs:
       packages: write # to save ccache
     with:
       runs-on: ubuntu-26.04
+      test-categories: ${{ inputs.test-categories }}
       image: rockylinux/rockylinux:9
       toolchain: clang
       ccache-key: rocky9-mpi-clang
@@ -60,6 +70,7 @@ jobs:
       packages: write # to save ccache
     with:
       runs-on: ubuntu-26.04
+      test-categories: ${{ inputs.test-categories }}
       image: rockylinux/rockylinux:9
       make-dist: true
       ccache-key: rocky9-mpi-gcc
@@ -71,6 +82,7 @@ jobs:
       packages: write # to save ccache
     with:
       runs-on: ubuntu-26.04
+      test-categories: ${{ inputs.test-categories }}
       image: rockylinux/rockylinux:9
       test-ranks: 2
       ccache-key: rocky9-mpi-gcc
@@ -82,6 +94,7 @@ jobs:
       packages: write # to save ccache
     with:
       runs-on: ubuntu-26.04
+      test-categories: ${{ inputs.test-categories }}
       image: rockylinux/rockylinux:9
       test-ranks: 2
       test-threads: 2
@@ -94,6 +107,7 @@ jobs:
       packages: write # to save ccache
     with:
       runs-on: ubuntu-26.04
+      test-categories: ${{ inputs.test-categories }}
       image: rockylinux/rockylinux:9
       test-threads: 2
       ccache-key: rocky9-mpi-gcc
@@ -105,6 +119,7 @@ jobs:
       packages: write # to save ccache
     with:
       runs-on: ubuntu-26.04
+      test-categories: ${{ inputs.test-categories }}
       image: rockylinux/rockylinux:9
       mpi: false
       ccache-key: rocky9-nompi-gcc
@@ -117,6 +132,7 @@ jobs:
       packages: write # to save ccache
     with:
       runs-on: ubuntu-26.04
+      test-categories: ${{ inputs.test-categories }}
       image: rockylinux/rockylinux:10
       test-ranks: 2
       ccache-key: rocky10-mpi-gcc
@@ -129,6 +145,7 @@ jobs:
       packages: write # to save ccache
     with:
       runs-on: ubuntu-26.04
+      test-categories: ${{ inputs.test-categories }}
       image: ubuntu:24.04
       ccache-key: ubuntu2404-mpi-gcc
       ccache-save: true
@@ -140,6 +157,7 @@ jobs:
       packages: write # to save ccache
     with:
       runs-on: ubuntu-26.04
+      test-categories: ${{ inputs.test-categories }}
       image: ubuntu:26.04
       ccache-key: ubuntu2604-mpi-gcc
       ccache-save: true
@@ -151,6 +169,7 @@ jobs:
       packages: write # to save ccache
     with:
       runs-on: macos-15
+      test-categories: ${{ inputs.test-categories }}
       python-version: '3.14'
       ccache-key: macos-15
       ccache-save: true
@@ -162,7 +181,51 @@ jobs:
       packages: write # to save ccache
     with:
       runs-on: macos-26
+      test-categories: ${{ inputs.test-categories }}
       python-version: '3.14'
       ccache-key: macos-26
       ccache-save: true
       artifact-name: macos-26
+  # The jobs below run only in the nightly workflow.
+  rocky9-mpi-mr-4:
+    if: ${{ contains(inputs.test-categories, 'nightly') }}
+    uses:
+      sstsimulator-at2/sst-core/.github/workflows/build-test.yml@devel # zizmor: ignore[unpinned-uses]
+    permissions:
+      packages: write # to save ccache
+    with:
+      runs-on: ubuntu-26.04
+      test-categories: ${{ inputs.test-categories }}
+      image: rockylinux/rockylinux:9
+      test-ranks: 4
+      ccache-key: rocky9-mpi-gcc
+      artifact-name: rocky9-mpi-mr-4
+  rocky9-mpi-mt-4:
+    if: ${{ contains(inputs.test-categories, 'nightly') }}
+    uses:
+      sstsimulator-at2/sst-core/.github/workflows/build-test.yml@devel # zizmor: ignore[unpinned-uses]
+    permissions:
+      packages: write # to save ccache
+    with:
+      runs-on: ubuntu-26.04
+      test-categories: ${{ inputs.test-categories }}
+      image: rockylinux/rockylinux:9
+      test-threads: 4
+      ccache-key: rocky9-mpi-gcc
+      artifact-name: rocky9-mpi-mt-4
+  rocky9-mpi-mr-3-mt-2:
+    if: ${{ contains(inputs.test-categories, 'nightly') }}
+    uses:
+      sstsimulator-at2/sst-core/.github/workflows/build-test.yml@devel # zizmor: ignore[unpinned-uses]
+    permissions:
+      packages: write # to save ccache
+    with:
+      runs-on: ubuntu-26.04
+      test-categories: ${{ inputs.test-categories }}
+      image: rockylinux/rockylinux:9
+      test-ranks: 3
+      test-threads: 2
+      # 6 PEs on a runner with 4 hardware threads
+      test-oversubscribe: true
+      ccache-key: rocky9-mpi-gcc
+      artifact-name: rocky9-mpi-mr-3-mt-2
