@@ -125,7 +125,22 @@ jobs:
       ccache-key: rocky9-nompi-gcc
       ccache-save: true
       artifact-name: rocky9-nompi
-  rocky10-mpi-mr-2:
+  # Left out in favor of rocky10-nompi while we debug OpenMPI 5
+  #
+  # rocky10-mpi-mr-2:
+  #   uses:
+  #     sstsimulator-at2/sst-core/.github/workflows/build-test.yml@devel # zizmor: ignore[unpinned-uses]
+  #   permissions:
+  #     packages: write # to save ccache
+  #   with:
+  #     runs-on: ubuntu-26.04
+  #     test-categories: ${{ inputs.test-categories }}
+  #     image: rockylinux/rockylinux:10
+  #     test-ranks: 2
+  #     ccache-key: rocky10-mpi-gcc
+  #     ccache-save: true
+  #     artifact-name: rocky10-mpi-mr-2
+  rocky10-mpi:
     uses:
       sstsimulator-at2/sst-core/.github/workflows/build-test.yml@devel # zizmor: ignore[unpinned-uses]
     permissions:
@@ -134,10 +149,9 @@ jobs:
       runs-on: ubuntu-26.04
       test-categories: ${{ inputs.test-categories }}
       image: rockylinux/rockylinux:10
-      test-ranks: 2
       ccache-key: rocky10-mpi-gcc
       ccache-save: true
-      artifact-name: rocky10-mpi-mr-2
+      artifact-name: rocky10-mpi
   ubuntu2404-mpi:
     uses:
       sstsimulator-at2/sst-core/.github/workflows/build-test.yml@devel # zizmor: ignore[unpinned-uses]
