@@ -30,7 +30,7 @@ jobs:
         run: "true"
   tests:
     needs: [all-prechecks]
-    uses: $/.github/workflows/build_and_test.yml
+    uses: $/.github/workflows/test-matrix-github.yml
     permissions:
       packages: write # to save ccache in ghcr.io
   all-tests:
