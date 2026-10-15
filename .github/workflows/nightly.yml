@@ -7,8 +7,10 @@ name: nightly
 # yamllint disable-line rule:truthy
 on:
   # Scheduled runs use the default branch, devel.
-  schedule:
-    - cron: '0 7 * * *'
+  #
+  # Disabled for our fork
+  # schedule:
+  #   - cron: '0 7 * * *'
   workflow_dispatch:
 
 concurrency:
