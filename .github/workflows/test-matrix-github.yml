@@ -1,5 +1,5 @@
 ---
-name: sst-core build/install/test
+name: sst-elements build/install/test on free runners
 
 # yamllint disable-line rule:truthy
 on:
@@ -13,21 +13,21 @@ on:
         type: string
 
 concurrency:
-  group: build_and_test-${{github.workflow}}-${{github.ref}}-${{github.event.pull_request.number || github.run_number}}
+  group: test-matrix-github-${{github.workflow}}-${{github.ref}}-${{github.event.pull_request.number || github.run_number}}
   cancel-in-progress: true
 
 permissions: {}
 
 # Jobs that build the same configuration share a ccache-key, and only one of
-# them saves it.
+# them must save it; check this when adding or removing jobs.
 #
-# Because build-test.yml comes from the devel branch of sst-core, changes must
+# Because sst-ci-job.yml comes from the devel branch of sst-core, changes must
 # merge there before sst-elements can use it.  It is unpinned to prevent
 # falling out of step with the sst-core@devel scripts it calls.
 jobs:
   rocky8-mpi-mr-2:
     uses:
-      sstsimulator-at2/sst-core/.github/workflows/build-test.yml@devel # zizmor: ignore[unpinned-uses]
+      sstsimulator-at2/sst-core/.github/workflows/sst-ci-job.yml@devel # zizmor: ignore[unpinned-uses]
     permissions:
       packages: write # to save ccache
     with:
@@ -40,7 +40,7 @@ jobs:
       artifact-name: rocky8-mpi-mr-2
   rocky9-mpi:
     uses:
-      sstsimulator-at2/sst-core/.github/workflows/build-test.yml@devel # zizmor: ignore[unpinned-uses]
+      sstsimulator-at2/sst-core/.github/workflows/sst-ci-job.yml@devel # zizmor: ignore[unpinned-uses]
     permissions:
       packages: write # to save ccache
     with:
@@ -52,7 +52,7 @@ jobs:
       artifact-name: rocky9-mpi
   rocky9-mpi-clang:
     uses:
-      sstsimulator-at2/sst-core/.github/workflows/build-test.yml@devel # zizmor: ignore[unpinned-uses]
+      sstsimulator-at2/sst-core/.github/workflows/sst-ci-job.yml@devel # zizmor: ignore[unpinned-uses]
     permissions:
       packages: write # to save ccache
     with:
@@ -65,7 +65,7 @@ jobs:
       artifact-name: rocky9-mpi-clang
   rocky9-mpi-make-dist:
     uses:
-      sstsimulator-at2/sst-core/.github/workflows/build-test.yml@devel # zizmor: ignore[unpinned-uses]
+      sstsimulator-at2/sst-core/.github/workflows/sst-ci-job.yml@devel # zizmor: ignore[unpinned-uses]
     permissions:
       packages: write # to save ccache
     with:
@@ -77,7 +77,7 @@ jobs:
       artifact-name: rocky9-mpi-make-dist
   rocky9-mpi-mr-2:
     uses:
-      sstsimulator-at2/sst-core/.github/workflows/build-test.yml@devel # zizmor: ignore[unpinned-uses]
+      sstsimulator-at2/sst-core/.github/workflows/sst-ci-job.yml@devel # zizmor: ignore[unpinned-uses]
     permissions:
       packages: write # to save ccache
     with:
@@ -89,7 +89,7 @@ jobs:
       artifact-name: rocky9-mpi-mr-2
   rocky9-mpi-mr-2-mt-2:
     uses:
-      sstsimulator-at2/sst-core/.github/workflows/build-test.yml@devel # zizmor: ignore[unpinned-uses]
+      sstsimulator-at2/sst-core/.github/workflows/sst-ci-job.yml@devel # zizmor: ignore[unpinned-uses]
     permissions:
       packages: write # to save ccache
     with:
@@ -102,7 +102,7 @@ jobs:
       artifact-name: rocky9-mpi-mr-2-mt-2
   rocky9-mpi-mt-2:
     uses:
-      sstsimulator-at2/sst-core/.github/workflows/build-test.yml@devel # zizmor: ignore[unpinned-uses]
+      sstsimulator-at2/sst-core/.github/workflows/sst-ci-job.yml@devel # zizmor: ignore[unpinned-uses]
     permissions:
       packages: write # to save ccache
     with:
@@ -114,7 +114,7 @@ jobs:
       artifact-name: rocky9-mpi-mt-2
   rocky9-nompi:
     uses:
-      sstsimulator-at2/sst-core/.github/workflows/build-test.yml@devel # zizmor: ignore[unpinned-uses]
+      sstsimulator-at2/sst-core/.github/workflows/sst-ci-job.yml@devel # zizmor: ignore[unpinned-uses]
     permissions:
       packages: write # to save ccache
     with:
@@ -129,7 +129,7 @@ jobs:
   #
   # rocky10-mpi-mr-2:
   #   uses:
-  #     sstsimulator-at2/sst-core/.github/workflows/build-test.yml@devel # zizmor: ignore[unpinned-uses]
+  #     sstsimulator-at2/sst-core/.github/workflows/sst-ci-job.yml@devel # zizmor: ignore[unpinned-uses]
   #   permissions:
   #     packages: write # to save ccache
   #   with:
@@ -142,7 +142,7 @@ jobs:
   #     artifact-name: rocky10-mpi-mr-2
   rocky10-mpi:
     uses:
-      sstsimulator-at2/sst-core/.github/workflows/build-test.yml@devel # zizmor: ignore[unpinned-uses]
+      sstsimulator-at2/sst-core/.github/workflows/sst-ci-job.yml@devel # zizmor: ignore[unpinned-uses]
     permissions:
       packages: write # to save ccache
     with:
@@ -154,7 +154,7 @@ jobs:
       artifact-name: rocky10-mpi
   ubuntu2404-mpi:
     uses:
-      sstsimulator-at2/sst-core/.github/workflows/build-test.yml@devel # zizmor: ignore[unpinned-uses]
+      sstsimulator-at2/sst-core/.github/workflows/sst-ci-job.yml@devel # zizmor: ignore[unpinned-uses]
     permissions:
       packages: write # to save ccache
     with:
@@ -166,7 +166,7 @@ jobs:
       artifact-name: ubuntu2404-mpi
   ubuntu2604-mpi:
     uses:
-      sstsimulator-at2/sst-core/.github/workflows/build-test.yml@devel # zizmor: ignore[unpinned-uses]
+      sstsimulator-at2/sst-core/.github/workflows/sst-ci-job.yml@devel # zizmor: ignore[unpinned-uses]
     permissions:
       packages: write # to save ccache
     with:
@@ -178,7 +178,7 @@ jobs:
       artifact-name: ubuntu2604-mpi
   macos-15:
     uses:
-      sstsimulator-at2/sst-core/.github/workflows/build-test.yml@devel # zizmor: ignore[unpinned-uses]
+      sstsimulator-at2/sst-core/.github/workflows/sst-ci-job.yml@devel # zizmor: ignore[unpinned-uses]
     permissions:
       packages: write # to save ccache
     with:
@@ -190,7 +190,7 @@ jobs:
       artifact-name: macos-15
   macos-26:
     uses:
-      sstsimulator-at2/sst-core/.github/workflows/build-test.yml@devel # zizmor: ignore[unpinned-uses]
+      sstsimulator-at2/sst-core/.github/workflows/sst-ci-job.yml@devel # zizmor: ignore[unpinned-uses]
     permissions:
       packages: write # to save ccache
     with:
@@ -204,7 +204,7 @@ jobs:
   rocky9-mpi-mr-4:
     if: ${{ contains(inputs.test-categories, 'nightly') }}
     uses:
-      sstsimulator-at2/sst-core/.github/workflows/build-test.yml@devel # zizmor: ignore[unpinned-uses]
+      sstsimulator-at2/sst-core/.github/workflows/sst-ci-job.yml@devel # zizmor: ignore[unpinned-uses]
     permissions:
       packages: write # to save ccache
     with:
@@ -217,7 +217,7 @@ jobs:
   rocky9-mpi-mt-4:
     if: ${{ contains(inputs.test-categories, 'nightly') }}
     uses:
-      sstsimulator-at2/sst-core/.github/workflows/build-test.yml@devel # zizmor: ignore[unpinned-uses]
+      sstsimulator-at2/sst-core/.github/workflows/sst-ci-job.yml@devel # zizmor: ignore[unpinned-uses]
     permissions:
       packages: write # to save ccache
     with:
@@ -230,7 +230,7 @@ jobs:
   rocky9-mpi-mr-3-mt-2:
     if: ${{ contains(inputs.test-categories, 'nightly') }}
     uses:
-      sstsimulator-at2/sst-core/.github/workflows/build-test.yml@devel # zizmor: ignore[unpinned-uses]
+      sstsimulator-at2/sst-core/.github/workflows/sst-ci-job.yml@devel # zizmor: ignore[unpinned-uses]
     permissions:
       packages: write # to save ccache
     with:
