@@ -26,7 +26,7 @@ permissions: {}
 # falling out of step with the sst-core@devel scripts it calls.
 jobs:
   rocky8-mpi-mr-2:
-    uses: sstsimulator-at2/sst-core/.github/workflows/sst-ci-job.yml@devel
+    uses: sstsimulator-at2/sst-core/.github/workflows/sst-ci-job.yml@9395557e07829db07f2a24a92df0760006e550b4 # devel
     permissions:
       packages: write # to save ccache
     with:
@@ -38,7 +38,7 @@ jobs:
       ccache-save: true
       artifact-name: rocky8-mpi-mr-2
   rocky9-mpi:
-    uses: sstsimulator-at2/sst-core/.github/workflows/sst-ci-job.yml@devel
+    uses: sstsimulator-at2/sst-core/.github/workflows/sst-ci-job.yml@9395557e07829db07f2a24a92df0760006e550b4 # devel
     permissions:
       packages: write # to save ccache
     with:
@@ -49,7 +49,7 @@ jobs:
       ccache-save: true
       artifact-name: rocky9-mpi
   rocky9-mpi-clang:
-    uses: sstsimulator-at2/sst-core/.github/workflows/sst-ci-job.yml@devel
+    uses: sstsimulator-at2/sst-core/.github/workflows/sst-ci-job.yml@9395557e07829db07f2a24a92df0760006e550b4 # devel
     permissions:
       packages: write # to save ccache
     with:
@@ -61,7 +61,7 @@ jobs:
       ccache-save: true
       artifact-name: rocky9-mpi-clang
   rocky9-mpi-make-dist:
-    uses: sstsimulator-at2/sst-core/.github/workflows/sst-ci-job.yml@devel
+    uses: sstsimulator-at2/sst-core/.github/workflows/sst-ci-job.yml@9395557e07829db07f2a24a92df0760006e550b4 # devel
     permissions:
       packages: write # to save ccache
     with:
@@ -72,7 +72,7 @@ jobs:
       ccache-key: rocky9-mpi-gcc
       artifact-name: rocky9-mpi-make-dist
   rocky9-mpi-mr-2:
-    uses: sstsimulator-at2/sst-core/.github/workflows/sst-ci-job.yml@devel
+    uses: sstsimulator-at2/sst-core/.github/workflows/sst-ci-job.yml@9395557e07829db07f2a24a92df0760006e550b4 # devel
     permissions:
       packages: write # to save ccache
     with:
@@ -83,7 +83,7 @@ jobs:
       ccache-key: rocky9-mpi-gcc
       artifact-name: rocky9-mpi-mr-2
   rocky9-mpi-mr-2-mt-2:
-    uses: sstsimulator-at2/sst-core/.github/workflows/sst-ci-job.yml@devel
+    uses: sstsimulator-at2/sst-core/.github/workflows/sst-ci-job.yml@9395557e07829db07f2a24a92df0760006e550b4 # devel
     permissions:
       packages: write # to save ccache
     with:
@@ -95,7 +95,7 @@ jobs:
       ccache-key: rocky9-mpi-gcc
       artifact-name: rocky9-mpi-mr-2-mt-2
   rocky9-mpi-mt-2:
-    uses: sstsimulator-at2/sst-core/.github/workflows/sst-ci-job.yml@devel
+    uses: sstsimulator-at2/sst-core/.github/workflows/sst-ci-job.yml@9395557e07829db07f2a24a92df0760006e550b4 # devel
     permissions:
       packages: write # to save ccache
     with:
@@ -106,7 +106,7 @@ jobs:
       ccache-key: rocky9-mpi-gcc
       artifact-name: rocky9-mpi-mt-2
   rocky9-nompi:
-    uses: sstsimulator-at2/sst-core/.github/workflows/sst-ci-job.yml@devel
+    uses: sstsimulator-at2/sst-core/.github/workflows/sst-ci-job.yml@9395557e07829db07f2a24a92df0760006e550b4 # devel
     permissions:
       packages: write # to save ccache
     with:
@@ -132,7 +132,7 @@ jobs:
   #     ccache-save: true
   #     artifact-name: rocky10-mpi-mr-2
   rocky10-mpi:
-    uses: sstsimulator-at2/sst-core/.github/workflows/sst-ci-job.yml@devel
+    uses: sstsimulator-at2/sst-core/.github/workflows/sst-ci-job.yml@9395557e07829db07f2a24a92df0760006e550b4 # devel
     permissions:
       packages: write # to save ccache
     with:
@@ -143,7 +143,7 @@ jobs:
       ccache-save: true
       artifact-name: rocky10-mpi
   ubuntu2404-mpi:
-    uses: sstsimulator-at2/sst-core/.github/workflows/sst-ci-job.yml@devel
+    uses: sstsimulator-at2/sst-core/.github/workflows/sst-ci-job.yml@9395557e07829db07f2a24a92df0760006e550b4 # devel
     permissions:
       packages: write # to save ccache
     with:
@@ -154,7 +154,7 @@ jobs:
       ccache-save: true
       artifact-name: ubuntu2404-mpi
   ubuntu2604-mpi:
-    uses: sstsimulator-at2/sst-core/.github/workflows/sst-ci-job.yml@devel
+    uses: sstsimulator-at2/sst-core/.github/workflows/sst-ci-job.yml@9395557e07829db07f2a24a92df0760006e550b4 # devel
     permissions:
       packages: write # to save ccache
     with:
@@ -165,7 +165,7 @@ jobs:
       ccache-save: true
       artifact-name: ubuntu2604-mpi
   macos-15:
-    uses: sstsimulator-at2/sst-core/.github/workflows/sst-ci-job.yml@devel
+    uses: sstsimulator-at2/sst-core/.github/workflows/sst-ci-job.yml@9395557e07829db07f2a24a92df0760006e550b4 # devel
     permissions:
       packages: write # to save ccache
     with:
@@ -176,7 +176,7 @@ jobs:
       ccache-save: true
       artifact-name: macos-15
   macos-26:
-    uses: sstsimulator-at2/sst-core/.github/workflows/sst-ci-job.yml@devel
+    uses: sstsimulator-at2/sst-core/.github/workflows/sst-ci-job.yml@9395557e07829db07f2a24a92df0760006e550b4 # devel
     permissions:
       packages: write # to save ccache
     with:
@@ -189,7 +189,7 @@ jobs:
   # The jobs below run only in the nightly workflow.
   rocky9-mpi-mr-4:
     if: ${{ contains(inputs.test-categories, 'nightly') }}
-    uses: sstsimulator-at2/sst-core/.github/workflows/sst-ci-job.yml@devel
+    uses: sstsimulator-at2/sst-core/.github/workflows/sst-ci-job.yml@9395557e07829db07f2a24a92df0760006e550b4 # devel
     permissions:
       packages: write # to save ccache
     with:
@@ -201,7 +201,7 @@ jobs:
       artifact-name: rocky9-mpi-mr-4
   rocky9-mpi-mt-4:
     if: ${{ contains(inputs.test-categories, 'nightly') }}
-    uses: sstsimulator-at2/sst-core/.github/workflows/sst-ci-job.yml@devel
+    uses: sstsimulator-at2/sst-core/.github/workflows/sst-ci-job.yml@9395557e07829db07f2a24a92df0760006e550b4 # devel
     permissions:
       packages: write # to save ccache
     with:
@@ -213,7 +213,7 @@ jobs:
       artifact-name: rocky9-mpi-mt-4
   rocky9-mpi-mr-3-mt-2:
     if: ${{ contains(inputs.test-categories, 'nightly') }}
-    uses: sstsimulator-at2/sst-core/.github/workflows/sst-ci-job.yml@devel
+    uses: sstsimulator-at2/sst-core/.github/workflows/sst-ci-job.yml@9395557e07829db07f2a24a92df0760006e550b4 # devel
     permissions:
       packages: write # to save ccache
     with:
