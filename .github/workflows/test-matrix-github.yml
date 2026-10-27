@@ -226,3 +226,18 @@ jobs:
       test-oversubscribe: true
       ccache-key: rocky9-mpi-gcc
       artifact-name: rocky9-mpi-mr-3-mt-2
+  rocky9-mpi-debug:
+    if: ${{ contains(inputs.test-categories, 'nightly') }}
+    uses: sstsimulator-at2/sst-core/.github/workflows/sst-ci-job.yml@devel
+    permissions:
+      packages: write # to save ccache
+    with:
+      runs-on: ubuntu-26.04
+      test-categories: ${{ inputs.test-categories }}
+      image: rockylinux/rockylinux:9
+      variant: debug
+      # --enable-debug changes sst_config.h, so nothing in rocky9-mpi-gcc
+      # would hit.
+      ccache-key: rocky9-mpi-gcc-debug
+      ccache-save: true
+      artifact-name: rocky9-mpi-debug
