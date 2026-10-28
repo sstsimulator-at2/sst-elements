@@ -228,7 +228,7 @@ jobs:
       artifact-name: rocky9-mpi-mr-3-mt-2
   rocky9-mpi-debug:
     if: ${{ contains(inputs.test-categories, 'nightly') }}
-    uses: sstsimulator-at2/sst-core/.github/workflows/sst-ci-job.yml@devel
+    uses: sstsimulator-at2/sst-core/.github/workflows/sst-ci-job.yml@85d4989db0986b93cd916227924a6c6567ee5545 # devel
     permissions:
       packages: write # to save ccache
     with:
